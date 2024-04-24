@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.10'
 }
 ext {
     Kotlin_Language_Version = '1.7'
@@ -96,6 +97,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.11.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
 }
