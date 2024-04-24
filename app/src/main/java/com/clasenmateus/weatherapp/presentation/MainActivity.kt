@@ -1,5 +1,6 @@
 package com.clasenmateus.weatherapp.presentation
 
+import android.Manifest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -37,8 +38,8 @@ class MainActivity : ComponentActivity() {
             viewModel.loadWeatherInfo()
         }
         permissionLauncher.launch(arrayOf(
-            android.Manifest.permission.ACCESS_COARSE_LOCATION,
-            android.Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
         ))
         setContent {
             WeatherAppTheme {
