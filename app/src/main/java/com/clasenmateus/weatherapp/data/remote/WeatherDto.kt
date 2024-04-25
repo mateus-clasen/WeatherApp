@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 /**
  * Created by Mateus H. Clasen on 21/04/2024.
  */
-@JsonClass(generateAdapter = true)
+//@JsonClass(generateAdapter = true)
 data class WeatherDto(
     @field:Json(name= "hourly")
     val weatherData: WeatherDataDto

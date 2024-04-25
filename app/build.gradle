@@ -101,4 +101,6 @@ dependencies {
 
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
+
+    kaptTest 'com.squareup.moshi:moshi-kotlin-codegen:2.11.0'
 }
