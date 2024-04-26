@@ -26,9 +26,9 @@ object AppModule {
     fun provideWeatherApi(): WeatherApi {
         return Retrofit.Builder()
             .baseUrl("https://api.open-meteo.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-         .build()
-         .create()
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create()
     }
 
     @Provides

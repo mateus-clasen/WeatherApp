@@ -8,6 +8,7 @@ import android.location.LocationManager
 import androidx.core.content.ContextCompat
 import com.clasenmateus.weatherapp.domain.location.LocationTracker
 import com.google.android.gms.location.FusedLocationProviderClient
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -15,6 +16,7 @@ import kotlin.coroutines.resume
 /**
  * Created by Mateus H. Clasen on 22/04/2024.
  */
+@ExperimentalCoroutinesApi
 class DefaultLocationTracker @Inject constructor(
     private val locationClient: FusedLocationProviderClient,
     private val application: Application
