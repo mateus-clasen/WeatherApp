@@ -19,12 +19,12 @@ private data class IndexedWeatherData(
 
 
 fun WeatherDataDto.toWeatherDataMap(): Map<Int, List<WeatherData>> {
-    return time.mapIndexed { index, time ->
-        val temperature = temperatures[index]
-        val weatherCode = weatherCodes[index]
-        val pressure = pressures[index]
-        val windSpeed = windSpeeds[index]
-        val humidity = humidities[index]
+    return time?.mapIndexed { index, time ->
+        val temperature = temperatures?.get(index)
+        val weatherCode = weatherCodes?.get(index)
+        val pressure = pressures?.get(index)
+        val windSpeed = windSpeeds?.get(index)
+        val humidity = humidities?.get(index)
         IndexedWeatherData(
             index = index,
             data= WeatherData(
@@ -33,14 +33,14 @@ fun WeatherDataDto.toWeatherDataMap(): Map<Int, List<WeatherData>> {
                 pressure = pressure,
                 windSpeed = windSpeed,
                 humidity = humidity,
-                weatherType = WeatherType.fromWMO(weatherCode)
+                weatherType = weatherCode?.let { WeatherType.fromWMO(it) }
             )
         )
-    }.groupBy {
+    }?.groupBy {
         it.index / 24
-    }.mapValues {
+    }?.mapValues {
         it.value.map { it.data }
-    }
+    } ?: emptyMap()
 }
 
 fun WeatherDto.toWeatherInfo(): WeatherInfo {
@@ -48,7 +48,7 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
     val now = LocalDateTime.now()
     val currentWeatherData = weatherDataMap[0]?.find {
         val hour = if(now.minute < 30) now.hour else now.hour + 1
-        it.time.hour == hour
+        it.time?.hour == hour
     }
     return WeatherInfo(
         weatherDataPerDay = weatherDataMap,

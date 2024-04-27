@@ -3,6 +3,7 @@ package com.clasenmateus.weatherapp.presentation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.clasenmateus.weatherapp.domain.weather.WeatherData
+import org.w3c.dom.Text
 import java.time.format.DateTimeFormatter
 
 /**
@@ -26,9 +28,9 @@ fun HourlyWeatherDisplay(
     textColor: Color = Color.White
 ) {
     val formattedTime = remember(weatherData) {
-        weatherData.time.format(
+        weatherData.time?.format(
             DateTimeFormatter.ofPattern("HH:mm")
-        )
+        ) ?: DateTimeFormatter.ofPattern("HH:mm")
     }
     Column(
         modifier = modifier,
@@ -39,15 +41,21 @@ fun HourlyWeatherDisplay(
             text = formattedTime,
             color = Color.LightGray
         )
-        Image(
-            painter = painterResource(id = weatherData.weatherType.iconRes),
-            contentDescription = null,
-            modifier = Modifier.width(40.dp)
-        )
+        weatherData.weatherType?.let { painterResource(id = it.iconRes) }?.let {
+            Image(
+                painter = it,
+                contentDescription = null,
+                modifier = Modifier.width(40.dp)
+            )
+        }
         Text(
             text = "${weatherData.temperatureCelsius}°C",
             color = textColor,
             fontWeight = FontWeight.Bold
         )
     }
+}
+
+private fun ColumnScope.Text(text: Any?, color: Color) {
+
 }

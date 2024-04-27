@@ -100,6 +100,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
 
 
+    //Moshi
+    def moshi_version = "1.8.0"
+    //kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    implementation "com.squareup.moshi:moshi-adapters:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
 
     kaptTest 'com.squareup.moshi:moshi-kotlin-codegen:2.11.0'
