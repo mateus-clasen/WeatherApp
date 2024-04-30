@@ -28,9 +28,9 @@ fun HourlyWeatherDisplay(
     textColor: Color = Color.White
 ) {
     val formattedTime = remember(weatherData) {
-        weatherData.time?.format(
+        weatherData.time.format(
             DateTimeFormatter.ofPattern("HH:mm")
-        ) ?: DateTimeFormatter.ofPattern("HH:mm")
+        )
     }
     Column(
         modifier = modifier,
@@ -41,21 +41,15 @@ fun HourlyWeatherDisplay(
             text = formattedTime,
             color = Color.LightGray
         )
-        weatherData.weatherType?.let { painterResource(id = it.iconRes) }?.let {
-            Image(
-                painter = it,
-                contentDescription = null,
-                modifier = Modifier.width(40.dp)
-            )
-        }
+        Image(
+            painter = painterResource(id = weatherData.weatherType.iconRes),
+            contentDescription = null,
+            modifier = Modifier.width(40.dp)
+        )
         Text(
             text = "${weatherData.temperatureCelsius}°C",
             color = textColor,
             fontWeight = FontWeight.Bold
         )
     }
-}
-
-private fun ColumnScope.Text(text: Any?, color: Color) {
-
 }
